@@ -7,6 +7,9 @@ const products = (state = [], action)=> {
   if(action.type === 'SET_PRODUCTS'){
     return action.products;
   }
+  if(action.type === 'UPDATE_PRODUCT'){
+    return state.map(product => product.id === action.product.id ? action.product : product);
+  }
   return state;
 }
 
@@ -25,10 +28,25 @@ const setProducts = products => {
   };
 };
 
+const _updateProduct = product => {
+  return {
+    type: 'UPDATE_PRODUCT',
+    product
+  };
+};
+
 export const fetchProducts = ()=> {
   return async(dispatch)=> {
     const response = await axios.get('/api/products');
     dispatch(setProducts(response.data));
+  };
+};
+
+export const updateProduct = (product, navigate)=> {
+  return async(dispatch)=> {
+    const response = await axios.put(`/api/products/${product.id}`, product);
+    navigate('/products');
+    dispatch(_updateProduct(response.data));
   };
 };
 
