@@ -12,6 +12,8 @@ const Products = ()=> {
             <li key={ product.id }>
               { product.name }
               (${ product.price })
+              <br />
+              Number In Stock { product.numberInStock }
             </li>
           );
         })
