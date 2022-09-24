@@ -17,6 +17,7 @@ const orders = (state = [], action)=> {
   return state;
 }
 
+//action creators
 const setProducts = products => {
   return {
     type: 'SET_PRODUCTS',

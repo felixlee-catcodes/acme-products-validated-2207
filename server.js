@@ -9,6 +9,15 @@ app.use('/dist', express.static('dist'));
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/products', (req, res, next)=> {
+  /*
+  try {
+    const products = await Product.findAll();
+    res.send(products);
+  }
+  catch(ex){
+    next(ex);
+  }
+  */
   Product.findAll()
     .then( products => res.send(products))
     .catch(next);
