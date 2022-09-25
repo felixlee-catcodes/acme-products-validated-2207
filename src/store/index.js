@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import axios from 'axios';
@@ -9,6 +9,9 @@ const products = (state = [], action)=> {
   }
   if(action.type === 'UPDATE_PRODUCT'){
     return state.map(product => product.id === action.product.id ? action.product : product);
+  }
+  if(action.type === 'CREATE_PRODUCT'){
+    return [...state, action.product]
   }
   return state;
 }
@@ -35,6 +38,13 @@ const _updateProduct = product => {
   };
 };
 
+const _createProduct = product => {
+  return {
+    type: 'CREATE_PRODUCT',
+    product
+  };
+};
+
 export const fetchProducts = ()=> {
   return async(dispatch)=> {
     const response = await axios.get('/api/products');
@@ -47,6 +57,14 @@ export const updateProduct = (product, navigate)=> {
     const response = await axios.put(`/api/products/${product.id}`, product);
     navigate('/products');
     dispatch(_updateProduct(response.data));
+  };
+};
+
+export const createProduct = (product, navigate)=> {
+  return async(dispatch)=> {
+    const response = await axios.post('/api/products/create', product);
+    navigate('/products');
+    dispatch(_createProduct(response.data));
   };
 };
 

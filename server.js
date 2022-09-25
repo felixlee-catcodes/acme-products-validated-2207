@@ -6,6 +6,7 @@ app.use(express.json());
 
 
 app.use('/dist', express.static('dist'));
+
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/products', (req, res, next)=> {
@@ -29,6 +30,17 @@ app.put('/api/products/:id', (req, res, next)=> {
     .then( product => res.send(product))
     .catch(next);
 });
+
+app.post('/api/products/create', async(req, res, next)=>{
+  try{
+    await Product.create(req.body)
+    res.send(req.body)
+    console.log(req.body)
+  }
+  catch(ex){
+    next(ex)
+  }
+})
 
 app.use((err, req, res, next)=> {
   console.log(err);

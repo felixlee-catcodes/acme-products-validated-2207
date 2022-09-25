@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from './store';
 import Products from './Products';
 import ProductUpdate from './ProductUpdate';
+import ProductCreate from './ProductCreate';
 
 const App = ()=> {
   const { orders, products } = useSelector(state => state);
@@ -25,6 +26,7 @@ const App = ()=> {
         <Route path='/' element={ <div>Home</div> } />
         <Route path='/products' element={ <Products /> } />
         <Route path='/products/:id' element={ <ProductUpdate /> } />
+        <Route path='/products/create' element={ <ProductCreate /> } />        
       </Routes>
     </div>
   );

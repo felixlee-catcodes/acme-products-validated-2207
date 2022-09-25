@@ -7,7 +7,7 @@ const Products = ()=> {
 
 
   return (
-    <ul>
+    <div><ul>
       {
         products.map( product => {
           return (
@@ -22,6 +22,8 @@ const Products = ()=> {
         })
       }
     </ul>
+    <button><Link to={'/products/create'}>Add NewProduct</Link></button>
+    </div>
   );
 };
 
