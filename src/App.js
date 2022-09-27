@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from './store';
+import { fetchOrders, fetchProducts } from './store';
 import Products from './Products';
 import ProductUpdate from './ProductUpdate';
 import ProductCreate from './ProductCreate';
+import Orders from './Orders';
 
 const App = ()=> {
   const { orders, products } = useSelector(state => state);
@@ -13,6 +14,7 @@ const App = ()=> {
 
   useEffect(()=> {
     dispatch(fetchProducts());
+    dispatch(fetchOrders());
   }, []);
 
   return (
@@ -26,7 +28,8 @@ const App = ()=> {
         <Route path='/' element={ <div>Home</div> } />
         <Route path='/products' element={ <Products /> } />
         <Route path='/products/:id' element={ <ProductUpdate /> } />
-        <Route path='/products/create' element={ <ProductCreate /> } />        
+        <Route path='/products/create' element={ <ProductCreate /> } />
+        <Route path='/orders' element={ <Orders /> } />       
       </Routes>
     </div>
   );

@@ -31,6 +31,13 @@ const setProducts = products => {
   };
 };
 
+const setOrders = orders => {
+  return {
+    type: 'SET_ORDERS',
+    orders
+  };
+};
+
 const _updateProduct = product => {
   return {
     type: 'UPDATE_PRODUCT',
@@ -52,6 +59,13 @@ export const fetchProducts = ()=> {
   };
 };
 
+export const fetchOrders = ()=> {
+  return async(dispatch)=> {
+    const response = await axios.get('/api/orders');
+    dispatch(setOrders(response.data));
+  };
+};
+
 export const updateProduct = (product, navigate)=> {
   return async(dispatch)=> {
     const response = await axios.put(`/api/products/${product.id}`, product);
@@ -67,6 +81,10 @@ export const createProduct = (product, navigate)=> {
     dispatch(_createProduct(response.data));
   };
 };
+
+export const deleteProduct = ()=>{
+  console.log('clicked');
+}
 
 const reducer = combineReducers({
   products,

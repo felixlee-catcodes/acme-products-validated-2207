@@ -1,5 +1,5 @@
 const express = require('express');
-const { conn, seed, Product } = require('./db');
+const { conn, seed, Product, Order } = require('./db');
 const app = express();
 const path = require('path');
 app.use(express.json());
@@ -23,6 +23,14 @@ app.get('/api/products', (req, res, next)=> {
     .then( products => res.send(products))
     .catch(next);
 });
+
+app.get('/api/orders', (req, res, next)=>{
+  Order.findAll({
+    include: [{ model: Product }]
+  })
+    .then(orders => res.send(orders))
+    .catch(next);
+})
 
 app.put('/api/products/:id', (req, res, next)=> {
   Product.findByPk(req.params.id)
