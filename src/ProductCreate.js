@@ -1,44 +1,44 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createProduct } from "./store";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
-const ProductCreate = ()=>{
+const ProductCreate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [name, setName ] = useState('');
-  const [price, setPrice ] = useState(0);
-  const [numberInStock, setNumberInStock ] = useState(0);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [numberInStock, setNumberInStock] = useState(0);
 
-  const create = async(ev)=>{
+  const create = async (ev) => {
     ev.preventDefault();
-    const created = { name, price, numberInStock};
-    console.log(created)
-    try{
+    const created = { name, price, numberInStock };
+    try {
       await dispatch(createProduct(created, navigate));
+    } catch (err) {
+      console.log(err);
     }
-    catch(err){
-        console.log(err)
-    }
-    }
-    return (
-        <form onSubmit={ create }>
-
+  };
+  return (
+    <form onSubmit={create}>
       <div>
         <label>Name</label>
-        <input value={ name } onChange={ ev => setName(ev.target.value)}/>
+        <input value={name} onChange={(ev) => setName(ev.target.value)} />
       </div>
       <div>
         <label>Price</label>
-        <input value={ price } onChange={ ev => setPrice(ev.target.value)}/>
+        <input value={price} onChange={(ev) => setPrice(ev.target.value)} />
       </div>
       <div>
         <label>Number In Stock</label>
-        <input value={ numberInStock } onChange={ ev => setNumberInStock(ev.target.value)}/>
+        <input
+          value={numberInStock}
+          onChange={(ev) => setNumberInStock(ev.target.value)}
+        />
       </div>
       <button>Create</button>
-    </form> 
-    )
-}
+    </form>
+  );
+};
 
 export default ProductCreate;

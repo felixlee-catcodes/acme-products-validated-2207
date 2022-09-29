@@ -6,6 +6,7 @@ import Products from './Products';
 import ProductUpdate from './ProductUpdate';
 import ProductCreate from './ProductCreate';
 import Orders from './Orders';
+import OrderCreate from './OrderCreate'
 
 const App = ()=> {
   const { orders, products } = useSelector(state => state);
@@ -29,7 +30,8 @@ const App = ()=> {
         <Route path='/products' element={ <Products /> } />
         <Route path='/products/:id' element={ <ProductUpdate /> } />
         <Route path='/products/create' element={ <ProductCreate /> } />
-        <Route path='/orders' element={ <Orders /> } />       
+        <Route path='/orders' element={ <Orders /> } />
+        <Route path='/orders/create' element={ <OrderCreate /> } />       
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
-- add the ability to create a new product
+- add the ability to create a new product [X]
 - add the ability to delete a product
-- show existing orders (you will need to create model)
-  - an order has a productId
-  - an order has a quantity
-- add the ability to create a new order
+- show existing orders (you will need to create model) [X]
+  - an order has a productId [X]
+  - an order has a quantity [X]
+- add the ability to create a new order [X]
 - add the ability to delete an order
